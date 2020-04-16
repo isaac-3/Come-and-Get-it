@@ -1,0 +1,11 @@
+<%= form_with({ method: 'POST', url: '/login' }) do  | form | %>
+<div>
+<label>Username</label>
+<%= form.text_field(:username) %>
+</div>
+<div>
+<label>Password</label>
+<%= form.password_field(:password) %>
+</div>
+<%= form.submit('Login') %>
+<% end %>

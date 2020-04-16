@@ -1,0 +1,5 @@
+<%=form_with(model: @restaurant) do |f|%>
+<%=label_tag("Name: ")%>
+<%=f.text_field(:name)%>
+<%=f.submit%>
+<%end%>

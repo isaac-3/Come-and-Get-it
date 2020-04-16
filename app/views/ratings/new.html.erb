@@ -1,0 +1,9 @@
+<h1>Rate An Item: </h1>
+<%=form_with(model: @rating) do |f|%>
+    <%=label_tag("Menu Item: ")%>
+    <%=f.collection_select(:menu_item_id, @cart.orders.map { | order | order.menu_item}.uniq, :id, :name)%>
+    <%=label_tag("Give it a Rating: ")%>
+    <%=f.number_field(:rating, in: 1..5)%><br>
+<%=f.submit%>
+<%end%>
+

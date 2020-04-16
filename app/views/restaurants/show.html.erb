@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .title {
+            font-family: Florence, cursive;
+            background-color: black;
+            color: white;
+            padding: 8px;
+        } 
+        body {
+            background-image: url("https://www.elitetraveler.com/wp-content/uploads/2007/02/Palme-dOr.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100%;
+            background-size: cover;
+        }
+        li a:link, a:visited {
+            font-family: Florence, cursive;
+            color: red;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        li a:hover {
+        color: hotpink;
+        background-color: white;
+        }
+        strong {
+            color: hotpink;
+        }
+        strong.text {
+            color: white;
+        }
+    </style>
+</head> 
+
+<body>
+
+    <h1 class = "title"><%=@restaurant.name%></h1>
+        <strong><%=label_tag("Average Rating: ")%></strong>
+        <strong class = "text"><%=@avg_rating%><br></strong>
+    <br>
+        <strong><%=label_tag("Our most order item is: ")%></strong>
+        <strong class = "text"><%=@most_ordered%><br></strong>
+    <br>
+        <strong><%=label_tag("Our Menu: ")%></strong>
+        <ul>
+            <%@restaurant.menu_items.each do |mu|%>
+                <li><%=link_to(mu.name, mu)%></li>
+            <%end%>
+        </ul>
+        <%=link_to "<button type='button'>Back To Restaurants</button>".html_safe, "/restaurants"%>
+
+</body>
+
+</html>
+

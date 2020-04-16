@@ -1,0 +1,41 @@
+<%=label_tag("Menu Item: ")%>
+<%=f.collection_select(:menu_item_id, @menu_items, :id, :name)%><br>
+
+
+<%r.menu_items.each do |m|%>
+<li><%=m.name%></li>
+<%end%>
+
+
+<%=form_with(model: @order) do |f|%>
+
+<%=label_tag("User: ")%>
+<%=f.collection_select(:user_id, @users, :id, :name)%><br>
+<%=label_tag("Menu Item: ")%>
+<%=f.collection_select(:menu_item_id, @menu_items, :id, :name)%><br>
+<%=f.submit%>
+
+
+
+
+
+
+
+
+
+<strong>Restaurant:</strong>
+    <%=link_to o.restaurant.name, restaurant_path(o.menu_item.restaurant)%><br>
+<strong><%=label_tag("Menu Item:")%></strong>
+    <%=o.menu_item.name%><br>
+    <%= button_to "Remove Order", order_path(o), :method => :delete %>
+    <%= link_to "Give it a rating", new_rating_path(@user)%><br>
+<br>
+<%end%>
+<h3>Your current total is: $<%=@total%></h3>
+<%=link_to "Pick a Restaurant", "/restaurants"%>
+<%=link_to "Im ready to Checkout", "/checkout/#{@user.id}"%>
+
+
+<%=button_to "Start A New Cart", "/carts"%>
+
+validates :password, :presence => true, :length => { :minimum => 7}

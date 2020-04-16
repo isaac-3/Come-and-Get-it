@@ -1,0 +1,14 @@
+<%= flash[:qty_error] %>
+
+<%=form_with(model: Order.new) do |f|%>
+    <%=@item.name%>
+    $<%=@item.price%>
+    <%= f.number_field :quantity, min:1 %>
+    <%= f.hidden_field :menu_item_id, value: @item.id %>
+    <%= f.hidden_field :cart_id, value: @cart.id%>
+<%=f.submit%>
+<%end%>
+
+<%=link_to "<button type='button'>Back</button>".html_safe, "/restaurants/#{@item.restaurant.id}"%> <br>
+<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> <br>
+<%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>

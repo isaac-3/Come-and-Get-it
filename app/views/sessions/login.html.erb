@@ -1,0 +1,15 @@
+<%=flash[:error_name]%>
+<%=flash[:login_error]%>
+<%= form_with({ method: 'POST', url: '/login' }) do  | form | %>
+    <div>
+    <label>Username</label>
+    <%= form.text_field(:username) %>
+    </div>
+    <div>
+    <label>Password</label>
+    <%= form.password_field(:password) %>
+    </div>
+    <%= form.submit('Login') %>
+    <% end %>
+
+<%=link_to "<button type='button'>Sign up</button>".html_safe, new_user_path%> 

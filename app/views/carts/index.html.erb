@@ -1,0 +1,6 @@
+<% @carts.each do | cart | %>
+    <%=cart.user_id%>
+    <% cart.orders.each do | order | %>
+        <li><%= order.menu_item.name %></li>
+    <% end %>
+<% end %>

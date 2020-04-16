@@ -1,0 +1,9 @@
+<h1>Hello <%=@user.username%></h1>
+<h2>All Items in your cart:</h2>
+<% @cart.orders.each do | order | %></p>
+            <li><%= order.menu_item.name %>: $ <%= order.menu_item.price%></li>
+            <%= button_to "Remove Order", order_path(order), :method => :delete %>
+<% end %>
+<h2>For a total of: $ <%=@cart.orders.map{|o| o.menu_item.price}.sum %></h2>
+<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout_clear/#{@user.id}"%>
+
