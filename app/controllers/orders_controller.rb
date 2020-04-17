@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
                     cart_id: params[:order][:cart_id]
                 })
             end
-            redirect_to "/users/#{session[:user_id]}"
+            redirect_to "/carts/#{session[:user_id]}"
         end
     end
 
@@ -55,27 +55,4 @@ class OrdersController < ApplicationController
         redirect_back fallback_location: @user
     end
     
-    def checkout
-        @user = User.find_by(id: params[:id])
-        @cart = @user.carts.last
-    end
-
-    def checkout_clear
-        @user = User.find_by(id: params[:id])
-        @cart = @user.carts.last
-        if @cart.orders.empty?
-            flash[:error_empty] = "Your cart is empty!"
-            redirect_to "/users/#{session[:user_id]}"
-        else
-            @cart = nil
-            if @cart == nil
-                @cart = Cart.create({
-                    user_id: session[:user_id]
-                })
-            end 
-            flash[:purchase] = "Thank you for your purchase!"
-            redirect_to "/users/#{session[:user_id]}"    
-            end 
-        end
-    end
 end

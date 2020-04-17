@@ -1,11 +1,23 @@
-<%=form_with(model: @user) do | form | %>
-<div>
-<label>Username</label>
-<%=form.text_field(:username) %>
-</div>
-<div>
-<label>Password</label>
-<%=form.password_field(:password) %>
-</div>
-<%=form.submit('Sign Up!') %>
-<% end %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <title>Sign Up</title>
+</head>
+
+    <body>
+        <%= stylesheet_link_tag "login" %>
+
+        <%=form_with(model: @user, id: "form") do | form | %>
+            <div class="container" >
+                <%= form.text_field(:username, placeholder: "Username", class: "uname")%>
+            </div>
+            <div class="container" >
+                <%= form.password_field(:password, placeholder: "Password", class: "pword") %>
+            </div>
+            <%=form.submit('Sign Up!', id: "submit") %>
+        <% end %>
+    </body>
+
+</html>

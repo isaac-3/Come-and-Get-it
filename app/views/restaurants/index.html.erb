@@ -1,44 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .title {
-            font-family: Florence, cursive;
-            background-color: black;
-            color: white;
-            padding: 8px;
-        } 
-        body {
-            background-image: url("https://cdn.vox-cdn.com/thumbor/AVUcomHGj0BSQydrwcI0d2dnCQU=/0x0:2400x1600/1200x900/filters:focal(1008x608:1392x992)/cdn.vox-cdn.com/uploads/chorus_image/image/57032609/_MG_2957.179.jpg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            height: 100%;
-            background-size: cover;
-        }
-        li a:link, a:visited {
-            font-family: Florence, cursive;
-            color: red;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-        }
-        li a:hover {
-        color: hotpink;
-        background-color: white;
-        }
-
-    </style>
+    <title>RESTAURANTS</title>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
 </head> 
 
-<body>
-<h1 class = "title">Restaurants:</h1>
 
-<%@restaurants.each do |r|%>
-<li><%=link_to r.name, r%></li><br>
-<%end%>
+<body class= "restaurant_background">
+    <header>
+        <%=link_to "<button type='button' class='header_button'>Cart History</button>".html_safe, "/carts"%>
+    </header>
 
-<%=link_to "Check Your Cart", "/users/#{session[:user_id]}"%>
+    <form>
+        <%= stylesheet_link_tag "restaurant_index" %>
 
-<%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>
+        <h1 class="title">Restaurants</h1>
+
+        <%@restaurants.each do |r|%>
+        <ul><%=link_to r.name, r%></ul><br>
+        <%end%>
+
+        <%=link_to "<button type='button'>Check Your Cart</button>".html_safe, "/carts/#{session[:user_id]}"%>
+
+        <%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>
+    </form>
+
 </body>
+
 </html>

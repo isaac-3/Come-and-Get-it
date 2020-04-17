@@ -1,14 +1,27 @@
-<%= flash[:qty_error] %>
+<!DOCTYPE html>
+<html>
 
-<%=form_with(model: Order.new) do |f|%>
-    <%=@item.name%>
-    $<%=@item.price%>
-    <%= f.number_field :quantity, min:1 %>
-    <%= f.hidden_field :menu_item_id, value: @item.id %>
-    <%= f.hidden_field :cart_id, value: @cart.id%>
-<%=f.submit%>
-<%end%>
+<head>
+    <title>RESTAURANT</title>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
+</head> 
 
-<%=link_to "<button type='button'>Back</button>".html_safe, "/restaurants/#{@item.restaurant.id}"%> <br>
-<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> <br>
-<%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>
+<body class= "restaurant_background">
+    <%= stylesheet_link_tag "restaurant_index" %>
+
+    <%=form_with(model: Order.new, id: "form") do |f|%>
+    <p><%= flash[:qty_error] %></p><br>
+        <p><%=@item.name%></p>
+        <p>$<%=@item.price%></p><br>
+        <p><%= f.number_field :quantity, min:1 %> qty.</p>
+        <%= f.hidden_field :menu_item_id, value: @item.id %>
+        <%= f.hidden_field :cart_id, value: @cart.id%><br>
+        <%=f.submit('Submit Order', id: "submit") %>
+        <%=link_to "<button type='button'>Back</button>".html_safe, "/restaurants/#{@item.restaurant.id}"%> 
+        <%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> 
+        <%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> 
+    <% end %>
+</body>
+
+</html>

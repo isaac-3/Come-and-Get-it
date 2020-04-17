@@ -1,15 +1,28 @@
-<%=flash[:error_name]%>
-<%=flash[:login_error]%>
-<%= form_with({ method: 'POST', url: '/login' }) do  | form | %>
-    <div>
-    <label>Username</label>
-    <%= form.text_field(:username) %>
-    </div>
-    <div>
-    <label>Password</label>
-    <%= form.password_field(:password) %>
-    </div>
-    <%= form.submit('Login') %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <title>COME AND GET IT</title>
+</head>
+
+<body>
+    <%= stylesheet_link_tag "login" %>
+
+    <%= form_with({ method: 'POST', url: '/login', id: "form" }) do  | form | %>
+    <p><%=flash[:error_name]%></p>
+    <p><%=flash[:login_error]%></p>
+        <label class="main_title">COME AND GET IT </label>
+        <div class="container" >
+            <%= form.text_field(:username, placeholder: "Username", class: "uname")%>
+        </div>
+        <div class="container" >
+            <%= form.password_field(:password, placeholder: "Password", class: "pword") %>
+        </div>
+        <%= form.submit('Login', id: "submit") %>
+        <%=link_to "<button type='button'>Sign up</button>".html_safe, new_user_path%> 
     <% end %>
 
-<%=link_to "<button type='button'>Sign up</button>".html_safe, new_user_path%> 
+</body>
+
+</html>

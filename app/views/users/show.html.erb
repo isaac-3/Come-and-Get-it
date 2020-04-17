@@ -1,33 +1,0 @@
-<%=flash[:error]%>
-<%=flash[:error_empty]%>
-<%=flash[:purchase]%>
-
-<h1><%=@user.username%></h1>
-    <% @user.carts.each_with_index do | cart, index | %><br>
-        <label>Cart: <%= index + 1%></label>
-        <p><% cart.orders.each do | order | %></p>
-            <%=link_to order.menu_item.restaurant.name, restaurant_path(order.menu_item.restaurant)%>
-            <li><%= order.menu_item.name %>: <%= order.menu_item.price%></li>
-            <%if cart.id == @user.carts.last.id%>
-            <%= button_to "Remove Order", order_path(order), :method => :delete %>
-            <%end%>
-        <% end %>
-        <%if cart.id == @user.carts.last.id%>
-            <h3>Your current total is: <%=cart.orders.map{|o| o.menu_item.price}.sum %></h3>
-        <%else%>
-            <h3>Your total was: <%=cart.orders.map{|o| o.menu_item.price}.sum %></h3>
-        <%end%>
-        <%if cart.id != @user.carts.last.id%>
-            <%= link_to "<button type='button'>Give it a rating</button>".html_safe, new_rating_path(cart.id)%><br>
-        <% end %>
-            <%= button_to "Remove Cart", cart_path(cart), :method => :delete %>
-    <% end %><br>
-
-
-<%=button_to "Start A New Cart", "/carts"%>
-<%=link_to "<button type='button'>Add an order</button>".html_safe, "/restaurants"%> <br>
-<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> <br>
-<%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>
-
-
-

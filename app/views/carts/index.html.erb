@@ -1,6 +1,53 @@
-<% @carts.each do | cart | %>
-    <%=cart.user_id%>
-    <% cart.orders.each do | order | %>
-        <li><%= order.menu_item.name %></li>
-    <% end %>
-<% end %>
+<!DOCTYPE html>
+<html>
+
+    <%= stylesheet_link_tag "restaurant_index" %>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <title>ORDERS</title>
+</head>
+
+<header>
+      <%=link_to "<button type='button' class='header_button'>Restaurants</button>".html_safe, "/restaurants"%> 
+      <%=link_to "<button type='button' class='header_button'>Log Out</button>".html_safe, logout_path%> 
+
+</header>
+
+<div class="container">
+<body id="checkout_page">
+    <div class="myDiv">
+
+<p><%=flash[:error]%></p>
+<p><%=flash[:error_empty]%></p>
+<p><%=flash[:purchase]%></p>
+
+<h1 class = "main_title"><%=@user.username%></h1>
+    <% @carts.each_with_index do | cart, index | %><br>
+        Cart: <%= index + 1%>
+        <% cart.orders.map { |order| order.menu_item}.uniq.each do | m | %>
+            <%=link_to m.restaurant.name, restaurant_path(m.restaurant)%>
+            <li><%= m.name %>: <%= m.price%> </li>
+            <%if cart.id == @user.carts.last.id%>
+            <%= link_to "<button type='button'>Remove Order</button>".html_safe, order_path(m), :method => :delete %>
+            <%end%>
+        <% end %>
+        
+        <%if cart.id == @user.carts.last.id%>
+            <h3>Your current total is: <%=cart.orders.map{|o| o.menu_item.price}.sum %></h3>
+        <%else%>
+            <h3>Your total was: <%=cart.orders.map{|o| o.menu_item.price}.sum %></h3>
+        <%end%>
+        <%if cart.id != @user.carts.last.id%>
+            <%= link_to "<button type='button'>Give it a rating</button>".html_safe, new_rating_path(cart.id)%><br>
+        <% end %>
+            <%= link_to "<button type='button'>Remove Cart</button>".html_safe, cart_path(cart), :method => :delete %><br>
+    <% end %><br>
+<%=link_to "<button type='button'>Start A New Cart</button>".html_safe, "/carts"%>
+<%=link_to "<button type='button'>Add an order</button>".html_safe, "/restaurants"%> <br>
+<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> <br>
+
+</div>
+
+</body>
+
+</html>
