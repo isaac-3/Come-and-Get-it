@@ -1,9 +1,26 @@
-<h1><%=@menu_item.name%></h1>
-<label>Description: </label>
-<p><%=@menu_item.description%></p>
-<label>Average Rating: </label>
-<p><%= @avg_rating %></p>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RESTAURANT</title>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
+</head> 
+
+<body class= "restaurant_background">
+    <form>
+        <h1 class="title"><%=@menu_item.name%></h1>
+        <label>Description: </label>
+        <p><%=@menu_item.description%></p>
+        <label>Price: </label>
+        <p>$ <%= @menu_item.price %></p><br>
+        <label>Average Rating: </label>
+        <p><%= @avg_rating %></p><br>
 
 
-<%=link_to "<button type='button'>Order This Item</button>".html_safe, "/menu_items/#{@menu_item.id}/order"%>
-<%=link_to "<button type='button'>Back</button>".html_safe, "/restaurants/#{@menu_item.restaurant.id}"%> <br>
+        <%=link_to "<button type='button'>Order This Item</button>".html_safe, "/menu_items/#{@menu_item.id}/order"%>
+        <%=link_to "<button type='button'>Back</button>".html_safe, "/restaurants/#{@menu_item.restaurant.id}"%> <br>
+    </form>
+</body>
+
+</html>

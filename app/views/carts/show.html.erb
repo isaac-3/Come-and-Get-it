@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <title>ORDERS</title>
+</head>
+
+<body id="checkout_page">
+    <div class="myDiv">
+    <%= stylesheet_link_tag "login" %>
+
+<%=flash[:error]%>
+<%=flash[:error_empty]%>
+<%=flash[:purchase]%>
+
+<h1 class = "main_title"><%=@user.username%></h1>
+    <% @item_count.each do | i, q | %>
+        <ul><%= "#{i}"  + "  qty: #{q}" %></ul><br>
+    <% end %>
+    <p>Cart Total: $ <%= @total_cart_value %></p>
+
+<%=link_to "<button type='button'>Start A New Cart</button>".html_safe, "/carts"%><br>
+<%=link_to "<button type='button'>Add an order</button>".html_safe, "/restaurants"%> <br>
+<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout/#{@user.id}" %> <br>
+<%=link_to "<button type='button'>Log Out</button>".html_safe, logout_path%> <br>
+</div>
+
+</body>
+
+</html>
+

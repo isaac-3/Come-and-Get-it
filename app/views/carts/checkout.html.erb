@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+    <title>ORDERS</title>
+</head>
+
+<body id="checkout_page">
+    <div class="myDiv">
+    <%= stylesheet_link_tag "login" %>
+
+<h1>Hello <%=@user.username%></h1>
+<h2>All Items in your cart:</h2>
+<% @cart.orders.each do | order | %>
+    <ul><%= order.menu_item.name %>: $ <%= order.menu_item.price%>
+        <%= button_to "Remove Order", order_path(order), :method => :delete %>
+    </ul>
+<% end %>
+<h2>For a total of: $ <%=@cart.orders.map{|o| o.menu_item.price}.sum %></h2>
+<%=link_to "<button type='button'>Checkout</button>".html_safe, "/checkout_clear/#{@user.id}"%>
+
+</div>
+
+</body>
+
+</html>
